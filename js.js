@@ -1,29 +1,10 @@
 let date = document.querySelector('.date');
 date.textContent = currentDate();
 let timee = document.querySelector('.time');
-
-let city = document.querySelector('.citty');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+let data;
+let displayTemp = document.getElementById('temp');
+let weather = document.getElementById('weather2');;
+let weatherImage = document.getElementById('weather-img');
 
 
 async function fetchWeatherData(city) {
@@ -39,14 +20,58 @@ const options = {
 try {
 	const response = await fetch(url, options);
 	const result = await response.text();
-	console.log(result);
+    data = JSON.parse(result);
+	console.log(data);
+    let cityTemperature = `${data.feels_like}°C`;
+    displayTemp.textContent = cityTemperature;
+    // 
+
+    let condition;
+    if (data.feels_like <= 10) {
+        condition = "Rainy";
+        const img = document.createElement('img');
+        img.src = './rain.png';
+        weatherImage.innerHTML = '';
+        weatherImage.appendChild(img);
+        img.classList.add('weather-iconz');
+    } else if (data.feels_like > 10 && data.feels_like <= 25) {
+        condition = "Cloudy";
+        const img = document.createElement('img');
+        img.src = './cloud.png';
+        weatherImage.innerHTML = '';
+        weatherImage.appendChild(img);
+        img.classList.add('weather-iconz');
+    } else {
+        condition = "Sunny";
+        const img = document.createElement('img');
+        img.src = './sun.png';
+        weatherImage.innerHTML = '';
+        weatherImage.appendChild(img);
+        img.classList.add('weather-iconz');
+    }
+    weather.textContent = condition;
+  
+    
+
 } catch (error) {
 	console.error(error);
 }
 }
 
+document.getElementById("inputt").addEventListener("input", function() {
 
-fetchWeatherData('nairobi');
+    let inputVal = this.value;
+    if (this.value.length === 1) { // Check if the input is the first character
+        this.value = this.value.charAt(0).toUpperCase(); // Capitalize it
+    }
+
+  
+    // Corrected way to capitalize the first letter
+    let inputVal2 = inputVal.charAt(0).toUpperCase() + inputVal.slice(1);
+    let city = document.querySelector('.citty');
+    city.textContent = inputVal2; // Now correctly updates with capitalized input
+    fetchWeatherData(inputVal); // Assuming you want to fetch data with the original input
+});
 
 
 function currentDate() {
@@ -72,3 +97,4 @@ function updater() {
     }, 1000);
 }
 updater();
+
