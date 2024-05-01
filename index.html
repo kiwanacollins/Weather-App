@@ -5,28 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="main">
-        <h1>Weather App</h1>
+        <h1 id="weather">Weather App</h1>
         <div class="toggle">
             <div class="search">
-                <input type="text" placeholder="Enter your city">
+                <input type="text" placeholder="Enter The City" id="inputt" onchange="inputStore()">
                 <img src="search.png" alt="" class="img">
             </div>
-            <div class="city">kampala</div>
+            <div class="city">Weather for : <span class="citty"></span></div>
             <img src="cloud.png" alt="kk" class="cloud">
             <p>cloudy</p>
-            <p class="degrees">20C</p>
+            <p class="degrees">20°C</p>
             <div class="date">
-                <p>27, Dec</p>
+                
             </div>
             <p class="time">
-                12h 25m 22s
+               
             </p>
         </div>
 
     
     </div>
+    <script src="js.js"></script>
 </body>
 </html>
